@@ -1,0 +1,10 @@
+*.user
+*.suo
+src/.vs/
+packages/
+obj/
+bin/
+testsites/
+node_modules/
+dist/
+
