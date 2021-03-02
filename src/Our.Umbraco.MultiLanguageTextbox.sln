@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.MultilanguageTextbox.Core", "Our.Umbraco.MultilanguageTextbox.Core\Our.Umbraco.MultilanguageTextbox.Core.csproj", "{93D65F2B-C552-4616-A1E2-50DB86E3AC9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.MultilanguageTextbox.Core", "Our.Umbraco.MultilanguageTextbox.Core\Our.Umbraco.MultilanguageTextbox.Core.csproj", "{93D65F2B-C552-4616-A1E2-50DB86E3AC9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "linting", "linting", "{16B78AB3-3CA0-4426-9631-AB619F9A4A55}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		stylecop.json = stylecop.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
