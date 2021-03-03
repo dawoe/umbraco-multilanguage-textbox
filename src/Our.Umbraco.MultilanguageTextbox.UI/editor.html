@@ -1,10 +1,8 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+<div class="umb-property-editor umb-multiple-textbox" ng-controller="Our.Umbraco.MultiLanguageTextboxController as vm">
 
-</body>
-</html>
+  <div class="flex flex-wrap textbox-wrapper" ng-repeat="item in vm.cultureTextBoxes track by $index">
+    <label class="control-label">{{item.label}}</label>
+    <input type="text" name="item_{{$index}}" ng-model="item.value" ng-blur="vm.updateModel()" class="umb-property-editor umb-textstring textstring flx-i" />
+  </div>
+
+</div>
