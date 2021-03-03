@@ -10,6 +10,8 @@
 
     vm.cultureTextBoxes = [];
 
+    vm.validationString = '';
+
     vm.updateModel = function () {
       $scope.model.value = [];
 
@@ -20,6 +22,32 @@
             text: c.value
           });
         });
+
+      updateValidationString();
+    }
+
+    vm.validateMandatory = function () {
+      var isValid = true;
+
+      if ($scope.model.validation.mandatory && vm.validationString === '') {
+        isValid = false;
+      } 
+
+      return {
+        isValid: isValid,
+        errorMsg: "Value cannot be empty",
+        errorKey: "required"
+      };
+    }
+
+    function updateValidationString() {
+      if (vm.cultureTextBoxes.length > 0) {
+        vm.validationString = vm.cultureTextBoxes.map(x => x.value).filter(x => x !== '').join(',')
+      }
+
+      if (vm.mltbform && vm.mltbform.valueString.$viewValue !== vm.valueString) {
+        vm.mltbform.valueString.$setViewValue(vm.validationString);
+      }
     }
 
     function init() {
@@ -50,8 +78,11 @@
             vm.cultureTextBoxes.push(ctb);
           });
 
+        updateValidationString();
       });
     }
+
+   
 
     init();
 
