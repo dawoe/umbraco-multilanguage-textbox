@@ -20,9 +20,6 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 
-cache:
-  - src\packages -> **\packages.config   # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
-
 platform: Any CPU
 
 configuration: Release
@@ -43,8 +40,6 @@ artifacts:
   - path: artifacts\*.nupkg
   - path: artifacts\*.zip
   
-
-
 deploy:
  # MyGet Deployment for beta releases  
   - provider: NuGet
