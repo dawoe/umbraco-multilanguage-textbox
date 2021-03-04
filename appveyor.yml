@@ -34,7 +34,7 @@ build:
   verbosity: minimal
 
 after_build:
-  - cd Packaging
+  - cd build
   - build-appveyor.bat
 
 artifacts:
