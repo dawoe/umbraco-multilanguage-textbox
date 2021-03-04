@@ -1,0 +1,73 @@
+image: Visual Studio 2017
+
+# Version format
+version: 1.0.0.{build}
+
+branches:
+  only:
+    - develop
+    - master
+
+init:
+  - set UMBRACO_PACKAGE_PRERELEASE_SUFFIX=rtm 
+  
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
+platform: Any CPU
+
+configuration: Release
+
+before_build:
+    - nuget restore src
+
+build:
+  parallel: true                  
+  project: src\Our.Umbraco.MultiLanguageTextbox.sln
+  verbosity: minimal
+
+after_build:
+  - cd build
+  - build-appveyor.bat
+
+artifacts:
+  - path: artifacts\*.nupkg
+  - path: artifacts\*.zip
+  
+deploy:
+ # MyGet Deployment for beta releases  
+  - provider: NuGet
+    server: https://www.myget.org/F/dawoe-umbraco/api/v2/package
+    api_key:
+      secure: xuhyqGpLpjeK0tUansB6IVWy89Fw+yqGqCmCpVuAY1fnDjfYrxA/gVGNBh8oU0JA
+    artifact: /.*\.nupkg/
+    on:
+      branch: develop
+      
+ # GitHub Deployment for releases
+  - provider: GitHub
+    auth_token:
+      secure: 2NNEN9lVF0/cA40PZrm64BMMK34Y26A8xK22eUdWcN/7Nn5KyyRH2+THumy91tcV
+    artifact: /.*\.zip/            # upload all Zip packages to release assets
+    draft: false
+    prerelease: false
+    on:
+      branch: master
+      appveyor_repo_tag: true        # deploy on tag push only
+
+# NuGet Deployment for releases
+  - provider: NuGet
+    server:
+    api_key:
+      secure: f5ijMJdo8hygOHm+RRD4pCBcRqj6uw4AWqDgG4MvA1x5sgdmcuRxvdtN1Cn2NB6I
+    artifact: /.*\.nupkg/
+    on:
+      branch: master
+      appveyor_repo_tag: true
+

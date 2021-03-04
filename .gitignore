@@ -8,3 +8,7 @@ testsites/
 node_modules/
 dist/
 
+build/NugetBuild/
+build/NugetCoreBuild/
+build/UmbracoBuild/
+artifacts/
