@@ -25,7 +25,7 @@ function Prepare-Solution {
     $binFolder = Join-Path -Path $buildFolder -ChildPath "bin";
     if (!(Test-Path -Path $binFolder)) {New-Item -Path $binFolder -Type Directory;}
 
-    Copy-Item -Path "${RootDir}\src\Our.Umbraco.MultiLanguageTextbox\bin\${Configuration}\net472\OUr.Umbraco.MultiLangugeTextBox*" -Destination $binFolder;
+    Copy-Item -Path "${RootDir}\src\Our.Umbraco.MultiLanguageTextbox\bin\${Configuration}\net472\OUr.Umbraco.MultiLanguageTextBox*" -Destination $binFolder;
 
     #Copy UI to build folder
     Copy-Item -Path  "${RootDir}\src\Our.Umbraco.MultiLanguageTextbox.UI\App_Plugins\" -Destination $buildFolder -Recurse -Force
