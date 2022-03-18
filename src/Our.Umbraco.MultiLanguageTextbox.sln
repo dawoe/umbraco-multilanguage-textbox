@@ -11,26 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "linting", "linting", "{16B7
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Our.Umbraco.MultilanguageTextbox.UI", "Our.Umbraco.MultilanguageTextbox.UI\", "{8ED9911A-8DF1-4007-96D5-251FA2C55C63}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_61356"
-		Debug.AspNetCompiler.PhysicalPath = "Our.Umbraco.MultilanguageTextbox.UI\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61356\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_61356"
-		Release.AspNetCompiler.PhysicalPath = "Our.Umbraco.MultilanguageTextbox.UI\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61356\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "61356"
-		SlnRelativePath = "Our.Umbraco.MultilanguageTextbox.UI\"
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Our.Umbraco.MultilanguageTextbox.UI", "Our.Umbraco.MultilanguageTextbox.UI\Our.Umbraco.MultilanguageTextbox.UI.csproj", "{0C6D730C-ED23-4FB0-A926-FFB462EB89DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +23,10 @@ Global
 		{93D65F2B-C552-4616-A1E2-50DB86E3AC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D65F2B-C552-4616-A1E2-50DB86E3AC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D65F2B-C552-4616-A1E2-50DB86E3AC9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ED9911A-8DF1-4007-96D5-251FA2C55C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ED9911A-8DF1-4007-96D5-251FA2C55C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ED9911A-8DF1-4007-96D5-251FA2C55C63}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ED9911A-8DF1-4007-96D5-251FA2C55C63}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{0C6D730C-ED23-4FB0-A926-FFB462EB89DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6D730C-ED23-4FB0-A926-FFB462EB89DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6D730C-ED23-4FB0-A926-FFB462EB89DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6D730C-ED23-4FB0-A926-FFB462EB89DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
