@@ -30,6 +30,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 		..\Utilities\UpdateTestSites.ps1 = ..\Utilities\UpdateTestSites.ps1
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{621599E6-04A8-42F7-B7E2-ECC445DE3C14}"
+	ProjectSection(SolutionItems) = preProject
+		..\Packaging\BuildPackage.ps1 = ..\Packaging\BuildPackage.ps1
+		..\Packaging\manifest-umbraco.xml = ..\Packaging\manifest-umbraco.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
