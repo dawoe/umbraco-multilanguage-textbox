@@ -56,7 +56,12 @@ Getting a value for the property will return you the value entered for the langu
 
 ## Changelog
 
+### 2.0.0
+
+- Umbraco V9 support
+
 ### 1.0.0
+
 - Initial release
 
 
