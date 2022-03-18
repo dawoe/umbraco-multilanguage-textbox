@@ -1,45 +1,26 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 # Version format
-version: 1.1.0.{build}
+version: 2.0.0.{build}
 
 branches:
   only:
     - develop
-    - master
-
-init:
-  - set UMBRACO_PACKAGE_PRERELEASE_SUFFIX=beta 
-  
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
+    - master   
 
 platform: Any CPU
 
 configuration: Release
 
-before_build:
-    - nuget restore src
-
-build:
-  parallel: true                  
-  project: src\Our.Umbraco.MultiLanguageTextbox.sln
-  verbosity: minimal
-
-after_build:
-  - cd build
-  - build-appveyor.bat
+build_script: 
+  - ps: .\Packaging\BuildPackage.ps1 beta
 
 artifacts:
-  - path: artifacts\*.nupkg
-  - path: artifacts\*.zip
+  - path: dist\*.nupkg
+  - path: dist\*.zip
   
+
+
 deploy:
  # MyGet Deployment for beta releases  
   - provider: NuGet
@@ -65,9 +46,8 @@ deploy:
   - provider: NuGet
     server:
     api_key:
-      secure: f5ijMJdo8hygOHm+RRD4pCBcRqj6uw4AWqDgG4MvA1x5sgdmcuRxvdtN1Cn2NB6I
+      secure: sYcQ+cM92ahNwBrZW4//jqeMtDFxKy51Z0FThvNSIG97cbUkocK/RF4OXEVjf2Ii
     artifact: /.*\.nupkg/
     on:
       branch: master
       appveyor_repo_tag: true
-

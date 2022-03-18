@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Our.Umbraco.MultilanguageTextbox.Core\Our.Umbraco.MultilanguageTextbox.Core.csproj" />
+    <ProjectReference Include="..\Our.Umbraco.MultilanguageTextbox.UI\Our.Umbraco.MultilanguageTextbox.UI.csproj" />
+  </ItemGroup>
+
+</Project>
