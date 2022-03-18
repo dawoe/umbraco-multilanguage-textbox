@@ -34,7 +34,7 @@
         // init has not finished
         return {
           isValid: true,
-          errorMsg: '',
+          errorMsg: '"Value cannot be empty"',
           errorKey : 'required',
         }
       }
