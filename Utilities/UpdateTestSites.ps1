@@ -16,7 +16,7 @@ Copy-Item -Path "$buildFolder\bin\*.*" -Destination "$RootDir\testsites\v8\bin" 
 
 Write-Host "Create nuget packages"
 
-$dateTime = get-date -Format "ddMMyyyyHHmmss"
+$dateTime = get-date -Format "yyyyMMddHHmmss"
 
 Write-Host "Version suffix $dateTime"
 

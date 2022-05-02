@@ -96,7 +96,7 @@ Compile-Solution -RootDir $RootDir -Configuration Debug
 
 Write-Host "Create nuget packages"
 
-$dateTime = get-date -Format "ddMMyyyyHHmmss"
+$dateTime = get-date -Format "yyyyMMddHHmmss"
 
 Write-Host "Version suffix $dateTime"
 
