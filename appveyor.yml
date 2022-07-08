@@ -1,7 +1,7 @@
 image: Visual Studio 2019
 
 # Version format
-version: 3.0.0.{build}
+version: 10.0.0.{build}
 
 branches:
   only:
