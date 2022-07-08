@@ -23,7 +23,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F89E97E-65AC-46DB-B901-D99E8E18AA2F}"
 	ProjectSection(SolutionItems) = preProject
 		..\Utilities\Compile.ps1 = ..\Utilities\Compile.ps1
-		..\Utilities\Prepare.ps1 = ..\Utilities\Prepare.ps1
 		..\Utilities\SetupTestSite.ps1 = ..\Utilities\SetupTestSite.ps1
 		..\Utilities\UpdateTestSites.ps1 = ..\Utilities\UpdateTestSites.ps1
 		..\Utilities\StartTestSite.ps1 = ..\Utilities\StartTestSite.ps1
