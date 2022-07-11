@@ -6,6 +6,7 @@ version: 2.1.0.{build}
 branches:
   only:
     - develop
+    - v2/develop
     - master   
 
 platform: Any CPU
