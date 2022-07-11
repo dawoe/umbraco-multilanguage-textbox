@@ -6,7 +6,7 @@ version: 2.1.0.{build}
 branches:
   only:
     - v2/develop
-    - master   
+    - v2/master   
 
 platform: Any CPU
 
@@ -39,7 +39,7 @@ deploy:
     draft: false
     prerelease: false
     on:
-      branch: master
+      branch: v2/master
       appveyor_repo_tag: true        # deploy on tag push only
 
 # NuGet Deployment for releases
@@ -49,5 +49,5 @@ deploy:
       secure: sYcQ+cM92ahNwBrZW4//jqeMtDFxKy51Z0FThvNSIG97cbUkocK/RF4OXEVjf2Ii
     artifact: /.*\.nupkg/
     on:
-      branch: master
+      branch: v2/master
       appveyor_repo_tag: true
