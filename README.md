@@ -50,11 +50,30 @@ If you only need the binaries you can install
 
 Getting a value for the property will return you the value entered for the language used for showing the website.
 
- ```
+ ```c#
  @Model.Value<string>("propalias")
  ```
 
+Or when you are using Models builder
+
+```C#
+@Model.NameOfYourProperty
+```
+
 ## Changelog
+
+### 10.0.0
+
+- Umbraco V10 support
+- Converted UI project to razor class library
+
+### 2.2.0
+
+- Make validation of mandatory language work correctly
+
+### 2.1.0
+
+- Fix restore issues on linux
 
 ### 2.0.0
 
