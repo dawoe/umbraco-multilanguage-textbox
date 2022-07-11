@@ -4,4 +4,4 @@ $SiteDir= "$RootDir\testsites\MultiLanguageTextbox"
 
 
 
-dotnet watch run --no-restore --project $SiteDir
+dotnet watch run  --project $SiteDir

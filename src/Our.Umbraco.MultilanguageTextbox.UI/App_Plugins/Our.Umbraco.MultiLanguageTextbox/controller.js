@@ -51,6 +51,8 @@
       else {
         vm.validationString = '';
       }
+
+      vm.mltbform.mandatory.$setViewValue(vm.validationString);
     }
 
     // We always need to ensure we dont submit anything broken

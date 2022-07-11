@@ -56,11 +56,11 @@ $dateTime = get-date -Format "yyyyMMddHHmmss"
 
 Write-Host "Version suffix $dateTime"
 
-dotnet pack $RootDir\src\Our.Umbraco.MultiLanguageTextbox.sln -c Debug -o $Destination\nuget --version-suffix "$dateTime" --no-build
+dotnet pack $RootDir\src\Our.Umbraco.MultiLanguageTextbox.sln -c Debug -o $Destination\nuget --version-suffix "$dateTime"
 
 cd "$Destination\MultiLanguageTextbox"
 
-dotnet add package Our.Umbraco.MultiLanguageTextbox -v 10.0.0-$dateTime --no-restore
+dotnet add package Our.Umbraco.MultiLanguageTextbox -v 10.0.0-$dateTime 
 
 dotnet build
 
