@@ -5,6 +5,6 @@
       <label class="control-label">{{item.label}} <span ng-if="vm.markMandatoryLanguages && item.isMandatory"> <strong class="umb-control-required">*</strong> </span> </label>
       <input type="text" name="item_{{$index}}" ng-model="item.value" ng-blur="vm.updateModel()" class="umb-property-editor umb-textstring textstring flx-i" />
     </div>
-    <input type="hidden" name="valueString" ng-model="vm.validationString" val-property-validator="vm.validateMandatory" />
+    <input type="text" name="mandatory" ng-model="vm.validationString" class="hide" />
   </ng-form>
 </div>
