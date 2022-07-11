@@ -9,6 +9,10 @@
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" />
+  </ItemGroup>
+
   <PropertyGroup>
       <Authors>Dave Woestenborghs</Authors>
       <Product>Our.Umbraco.MultiLanguageTextbox</Product>
