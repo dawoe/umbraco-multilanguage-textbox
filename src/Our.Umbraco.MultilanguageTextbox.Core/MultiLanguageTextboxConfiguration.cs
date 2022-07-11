@@ -2,11 +2,7 @@
 // Copyright (c) Dave Woestenborghs &amp; Contributors
 // </copyright>
 
-#if NET472
-using Umbraco.Core.PropertyEditors;
-#else
 using Umbraco.Cms.Core.PropertyEditors;
-#endif
 
 namespace Our.Umbraco.MultilanguageTextbox.Core
 {

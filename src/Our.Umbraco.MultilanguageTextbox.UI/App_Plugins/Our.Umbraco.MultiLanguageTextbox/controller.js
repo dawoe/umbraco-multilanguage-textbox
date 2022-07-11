@@ -15,30 +15,13 @@
     vm.markMandatoryLanguages = !$scope.model.validation.mandatory && $scope.model.config.isMandatoryLanguageRequired;
 
     vm.updateModel = function () {
-      $scope.model.value = [];
-
-      _.each(vm.cultureTextBoxes,
-        function (c) {
-          $scope.model.value.push({
-            culture: c.culture,
-            text: c.value
-          });
-        });
-
-      updateValidationString();
+      validate();
     }
 
-    vm.validateMandatory = function () {
+    function validate() {
 
-      if (vm.initialized === false) {
-        // init has not finished
-        return {
-          isValid: true,
-          errorMsg: '"Value cannot be empty"',
-          errorKey : 'required',
-        }
-      }
-     
+      updateValidationString();
+
       var isValid = true;
 
       if ($scope.model.validation.mandatory) {
@@ -55,11 +38,7 @@
       }
       
 
-      return {
-        isValid: isValid,
-        errorMsg: "Value cannot be empty",
-        errorKey: "required"
-      };
+      vm.mltbform.mandatory.$setValidity("minCount", isValid);
     }
 
     function updateValidationString() {
@@ -71,12 +50,30 @@
       }
       else {
         vm.validationString = '';
-      }        
-      
-      vm.mltbform.valueString.$setViewValue(vm.validationString);
-      vm.mltbform.valueString.$dirty = true;
-     
+      }
+
+      vm.mltbform.mandatory.$setViewValue(vm.validationString);
     }
+
+    // We always need to ensure we dont submit anything broken
+    var unsubscribe = $scope.$on("formSubmitting", function (ev, args) {
+
+      // Filter to items with values
+      $scope.model.value = [];
+
+      _.each(vm.cultureTextBoxes,
+        function (c) {
+          $scope.model.value.push({
+            culture: c.culture,
+            text: c.value
+          });
+        });
+    });
+
+    // When the scope is destroyed we need to unsubscribe
+    $scope.$on('$destroy', function () {
+      unsubscribe();
+    });
 
     function init() {
       if ($scope.model.value && $scope.model.value !== '') {
@@ -108,8 +105,8 @@
           });
 
         vm.initialized = true;
-        updateValidationString();
-        
+        validate();
+
       });
     }
 
