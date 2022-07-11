@@ -3,10 +3,4 @@
   <PropertyGroup>
     <StaticWebAssetBasePath>App_Plugins/Our.Umbraco.MultiLanguageTextbox</StaticWebAssetBasePath>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="build\**\*.*">
-      <Pack>True</Pack>
-      <PackagePath>buildTransitive</PackagePath>
-    </None>
-  </ItemGroup>
 </Project>
