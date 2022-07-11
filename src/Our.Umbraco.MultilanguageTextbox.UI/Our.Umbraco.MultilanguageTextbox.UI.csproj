@@ -4,10 +4,6 @@
     <StaticWebAssetBasePath>App_Plugins/Our.Umbraco.MultiLanguageTextbox</StaticWebAssetBasePath>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\Our.Umbraco.MultiLanguageTextbox\**\*.*">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-    </Content>
     <None Include="build\**\*.*">
       <Pack>True</Pack>
       <PackagePath>buildTransitive</PackagePath>
