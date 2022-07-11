@@ -5,7 +5,6 @@ version: 2.1.0.{build}
 
 branches:
   only:
-    - develop
     - v2/develop
     - master   
 
@@ -30,7 +29,7 @@ deploy:
       secure: xuhyqGpLpjeK0tUansB6IVWy89Fw+yqGqCmCpVuAY1fnDjfYrxA/gVGNBh8oU0JA
     artifact: /.*\.nupkg/
     on:
-      branch: develop
+      branch: v2/develop
       
  # GitHub Deployment for releases
   - provider: GitHub
