@@ -10,6 +10,6 @@ dotnet pack $RootDir\src\Our.Umbraco.MultilanguageTextbox.sln -c Debug -o $RootD
 
 cd  "$RootDir\testsites\MultiLanguageTextbox"
 
-dotnet add package Our.Umbraco.MultilanguageTextbox -v 10.0.0-$dateTime 
+dotnet add package Our.Umbraco.MultilanguageTextbox -v 10.1.0-$dateTime 
 
 cd $CurrentDir
