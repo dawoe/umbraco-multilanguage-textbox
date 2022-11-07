@@ -10,7 +10,7 @@ namespace Our.Umbraco.MultilanguageTextbox.Core
     /// <summary>
     /// Represents the multi language text box data editor configuration.
     /// </summary>
-    [DataEditor(Constants.PropertyEditorAlias, "Multi language text box", "~/App_Plugins/Our.Umbraco.MultiLanguageTextbox/editor.html", ValueType = "JSON", Group = "common", Icon = "icon-indent")]
+    [DataEditor(Constants.PropertyEditorAlias, "Multi language text box", "~/App_Plugins/Our.Umbraco.MultilanguageTextbox/editor.html", ValueType = "JSON", Group = "common", Icon = "icon-indent")]
     internal class MultiLanguageTextboxDataEditor : DataEditor
     {
         private readonly IIOHelper ioHelper;
