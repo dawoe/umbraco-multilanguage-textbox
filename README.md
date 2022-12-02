@@ -62,6 +62,14 @@ Or when you are using Models builder
 
 ## Changelog
 
+### 11.0.0
+
+Version compatible with Umbraco 11
+
+### 10.1.0
+
+- Fixes issue #4
+
 ### 10.0.0
 
 - Umbraco V10 support
