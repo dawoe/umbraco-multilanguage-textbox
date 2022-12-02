@@ -1,12 +1,12 @@
 image: Visual Studio 2022
 
 # Version format
-version: 10.2.0.{build}
+version: 11.0.0.{build}
 
 branches:
   only:
-    - v10/develop
-    - v10/master   
+    - develop
+    - master   
 
 platform: Any CPU
 
@@ -26,7 +26,7 @@ deploy:
       secure: xuhyqGpLpjeK0tUansB6IVWy89Fw+yqGqCmCpVuAY1fnDjfYrxA/gVGNBh8oU0JA
     artifact: /.*\.nupkg/
     on:
-      branch: v10/develop
+      branch: develop
       
  # GitHub Deployment for releases
   - provider: GitHub
@@ -36,7 +36,7 @@ deploy:
     draft: false
     prerelease: false
     on:
-      branch: v10/master
+      branch: master
       appveyor_repo_tag: true        # deploy on tag push only
 
 # NuGet Deployment for releases
@@ -46,5 +46,5 @@ deploy:
       secure: sYcQ+cM92ahNwBrZW4//jqeMtDFxKy51Z0FThvNSIG97cbUkocK/RF4OXEVjf2Ii
     artifact: /.*\.nupkg/
     on:
-      branch: v10/master
+      branch: master
       appveyor_repo_tag: true
