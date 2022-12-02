@@ -5,4 +5,7 @@
     <ProjectReference Include="..\Our.Umbraco.MultilanguageTextbox.UI\Our.Umbraco.MultilanguageTextbox.UI.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PackageTags>umbraco, umbraco-marketplace</PackageTags>
+  </PropertyGroup>
 </Project>
