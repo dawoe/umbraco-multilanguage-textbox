@@ -10,15 +10,15 @@
     Write-Host $CurrentDir
 
     Write-Host "Installing Umbraco templates"
-    dotnet new --install Umbraco.Templates
+    dotnet new install Umbraco.Templates
 
     Write-Host "Creating Umbraco site"
     cd $Destination
-    dotnet new umbraco -n MultiLanguageTextbox --development-database-type SQLite --version 10.0.0
+    dotnet new umbraco -n MultiLanguageTextbox --development-database-type SQLite --version 11.0.0 --friendly-name "Test admin" --email "admin@example.com" --password "1234567890"
 
     cd "$Destination\MultiLanguageTextbox"
 
-    dotnet add package Umbraco.TheStarterKit --version 10.0.0 --source https://api.nuget.org/v3/index.json
+    dotnet add package Umbraco.TheStarterKit --version 11.0.0 --source https://api.nuget.org/v3/index.json
 
     dotnet build
 
@@ -60,7 +60,7 @@ dotnet pack $RootDir\src\Our.Umbraco.MultiLanguageTextbox.sln -c Debug -o $Desti
 
 cd "$Destination\MultiLanguageTextbox"
 
-dotnet add package Our.Umbraco.MultiLanguageTextbox -v 10.0.0-$dateTime 
+dotnet add package Our.Umbraco.MultiLanguageTextbox -v 11.0.0-$dateTime 
 
 dotnet build
 

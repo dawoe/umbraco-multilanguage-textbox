@@ -23,15 +23,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F89E97E-65AC-46DB-B901-D99E8E18AA2F}"
 	ProjectSection(SolutionItems) = preProject
 		..\Utilities\SetupTestSite.ps1 = ..\Utilities\SetupTestSite.ps1
-		..\Utilities\UpdateTestSites.ps1 = ..\Utilities\UpdateTestSites.ps1
 		..\Utilities\StartTestSite.ps1 = ..\Utilities\StartTestSite.ps1
+		..\Utilities\UpdateTestSites.ps1 = ..\Utilities\UpdateTestSites.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{621599E6-04A8-42F7-B7E2-ECC445DE3C14}"
 	ProjectSection(SolutionItems) = preProject
 		..\appveyor.yml = ..\appveyor.yml
 		..\Packaging\BuildPackage.ps1 = ..\Packaging\BuildPackage.ps1
-		..\Packaging\manifest-umbraco.xml = ..\Packaging\manifest-umbraco.xml
+		..\umbraco-marketplace.json = ..\umbraco-marketplace.json
 	EndProjectSection
 EndProject
 Global
