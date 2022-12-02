@@ -19,7 +19,7 @@ namespace Our.Umbraco.MultilanguageTextbox.UI
                 PackageName = "Our.Umbraco.MultilanguageTextbox",
                 Scripts = new[]
                 {
-                    "/App_Plugins/Our.Umbraco.MultilanguageTextbox/controller.js",
+                    "/App_Plugins/Our.Umbraco.MultiLanguageTextbox/controller.js",
                 },
             });
     }
