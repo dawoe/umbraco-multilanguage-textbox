@@ -10,11 +10,11 @@
     Write-Host $CurrentDir
 
     Write-Host "Installing Umbraco templates"
-    dotnet new --install Umbraco.Templates
+    dotnet new install Umbraco.Templates
 
     Write-Host "Creating Umbraco site"
     cd $Destination
-    dotnet new umbraco -n MultiLanguageTextbox --development-database-type SQLite --version 11.0.0
+    dotnet new umbraco -n MultiLanguageTextbox --development-database-type SQLite --version 11.0.0 --friendly-name "Test admin" --email "admin@example.com" --password "1234567890"
 
     cd "$Destination\MultiLanguageTextbox"
 
