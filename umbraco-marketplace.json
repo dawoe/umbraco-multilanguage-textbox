@@ -1,0 +1,27 @@
+{  
+  "AuthorDetails": {
+    "Name": "Dave Woestenborghs",
+    "Description": "Umbraco MVP, contributor and package creator from Belgium",
+    "Url": "https://github.com/dawoe",
+    "ImageUrl": "https://github.com/dawoe.png",    
+  },
+  "Category": "Editor Tools",  
+  "DiscussionForumUrl": "https://our.umbraco.com/packages/backoffice-extensions/multilanguage-textbox/",
+  "DocumentationUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/blob/develop/README.md",
+  "LicenseTypes": [ "Free" ],
+  "IssueTrackerUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/issues",  
+  "PackageType": "Package",
+  "PackagesByAuthor": [ "Dawoe.OEmbedPickerPropertyEditor" ],
+  "Screenshots": [
+    {
+      "ImageUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/blob/develop/images/property-editor.jpg",
+      "Caption": "Property editor preview"
+    },
+    {
+      "ImageUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/blob/develop/images/datatype-configuration.jpg",
+      "Caption": "Data type configuration"
+    }
+  ],
+  "Tags": [ "multilanguage", "media" ],
+  "Title": "Multilanguage Textbox"
+}
