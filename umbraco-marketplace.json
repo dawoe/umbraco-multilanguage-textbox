@@ -14,11 +14,11 @@
   "PackagesByAuthor": [ "Dawoe.OEmbedPickerPropertyEditor" ],
   "Screenshots": [
     {
-      "ImageUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/blob/develop/images/property-editor.jpg",
+      "ImageUrl": "https://raw.githubusercontent.com/dawoe/umbraco-multilanguage-textbox/develop/images/property-editor.jpg",
       "Caption": "Property editor preview"
     },
     {
-      "ImageUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/blob/develop/images/datatype-configuration.jpg",
+      "ImageUrl": "https://raw.githubusercontent.com/dawoe/umbraco-multilanguage-textbox/develop/images/datatype-configuration.jpg",
       "Caption": "Data type configuration"
     }
   ],
