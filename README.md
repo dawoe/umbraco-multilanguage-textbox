@@ -64,8 +64,7 @@ Or when you are using Models builder
 
 ### 12.0.0
 
-Support for Umbraco 12
-
+Version compatible with Umbraco 12
 
 ### 11.0.0
 
