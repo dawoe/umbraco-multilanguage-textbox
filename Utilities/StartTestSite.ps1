@@ -1,7 +1,5 @@
 ﻿$CurrentDir = Split-Path $MyInvocation.MyCommand.Path
-$RootDir = Split-Path -Path $CurrentDir -Parent
-$SiteDir= "$RootDir\testsites\MultiLanguageTextbox"
+. $CurrentDir\Variables.ps1
 
 
-
-dotnet watch run  --project $SiteDir
+dotnet watch run --no-restore --project "$TestSitesFolder\$TestProjectName"

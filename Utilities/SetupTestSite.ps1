@@ -2,7 +2,13 @@
     [CmdletBinding()]
 	param(
 		[Parameter()]
-		[string] $Destination        
+		[string] $Destination,  
+        
+        [Parameter()]
+		[string] $ProjectName,
+
+        [Parameter()]
+		[string] $CmsVersion
 	)
 
     $CurrentDir = Get-Location
@@ -10,57 +16,49 @@
     Write-Host $CurrentDir
 
     Write-Host "Installing Umbraco templates"
-    dotnet new --install Umbraco.Templates
+    dotnet new -i Umbraco.Templates::$UmbracoVersion --force
 
     Write-Host "Creating Umbraco site"
     cd $Destination
-    dotnet new umbraco -n MultiLanguageTextbox --development-database-type SQLite --version 10.0.0
 
-    cd "$Destination\MultiLanguageTextbox"
+    dotnet new umbraco -n $ProjectName --development-database-type SQLite --version $CmsVersion --friendly-name "Admin" --email "admin@example.com" --password "1234567890"
 
-    dotnet add package Umbraco.TheStarterKit --version 10.0.0 --source https://api.nuget.org/v3/index.json
+    cd "$Destination\$ProjectName"
+
+    dotnet add package Umbraco.TheStarterKit --version $StarterKitVersion --source https://api.nuget.org/v3/index.json
 
     dotnet build
 
     # load project file xml
     $xml = New-Object System.Xml.XmlDocument
-    $xml.Load("$Destination\MultiLanguageTextbox\MultiLanguageTextbox.csproj")
+    $xml.Load("$Destination\$ProjectName\$ProjectName.csproj")
 
     $propertyGroup = Select-XML -Xml $xml -XPath '//PropertyGroup[1]'
     $newNode = $xml.CreateElement('RestoreAdditionalProjectSources')
-    $newNode.InnerText = '../Nuget'
+    $newNode.InnerText = '../nuget'
     $propertyGroup.Node.AppendChild($newNode)  
-    $xml.Save("$Destination\MultiLanguageTextbox\MultiLanguageTextbox.csproj")
-
+    $xml.Save("$Destination\$ProjectName\$ProjectName.csproj")
+    
     cd $CurrentDir
 }
 
 
 $CurrentDir = Split-Path $MyInvocation.MyCommand.Path
-$RootDir = Split-Path -Path $CurrentDir -Parent
-$Destination= "$RootDir\testsites"
+. $CurrentDir\Variables.ps1
 
 Write-Host "Cleaning up existing test site"
 
-if (Test-Path -Path $Destination) {
-    Remove-Item -LiteralPath $Destination -Force -Recurse
+$TestSitePath = "$TestSitesFolder\$TestProjectName"
+
+if (Test-Path -Path $TestSitePath) {
+    Remove-Item -LiteralPath $TestSitePath -Force -Recurse
 }
 
-New-Item -Path $RootDir -Name "testsites" -ItemType "directory"
+New-Item -Path $RootDir -Name "$TestSitesFolder\$TestProjectName" -ItemType "directory"
 
-Create-Test-Site $Destination
+Create-Test-Site $TestSitesFolder $TestProjectName $UmbracoVersion
 
-Write-Host "Create nuget packages"
-
-$dateTime = get-date -Format "yyyyMMddHHmmss"
-
-Write-Host "Version suffix $dateTime"
-
-dotnet pack $RootDir\src\Our.Umbraco.MultiLanguageTextbox.sln -c Debug -o $Destination\nuget --version-suffix "$dateTime"
-
-cd "$Destination\MultiLanguageTextbox"
-
-dotnet add package Our.Umbraco.MultiLanguageTextbox -v 10.2.0-$dateTime 
+Invoke-Expression "$CurrentDir\CreateNugetPackages.ps1"
 
 dotnet build
 
