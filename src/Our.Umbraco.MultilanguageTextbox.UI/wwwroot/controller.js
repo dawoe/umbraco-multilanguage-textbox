@@ -4,6 +4,7 @@
   function MultiLanguageTextboxController($scope, languageResource) {
     var vm = this;
 
+    vm.useTextArea = false;
     vm.initialized = false;
     vm.values = [];
     vm.cultures = [];
@@ -78,7 +79,9 @@
     function init() {
       if ($scope.model.value && $scope.model.value !== '') {
         vm.values = $scope.model.value;
-      }     
+      }
+
+      vm.useTextArea = $scope.model.config.useTextArea;
 
       languageResource.getAll().then(function (data) {
         vm.cultures = data;
