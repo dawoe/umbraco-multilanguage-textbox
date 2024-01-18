@@ -3,7 +3,10 @@
   <ng-form name="vm.mltbform">
     <div class="flex flex-wrap textbox-wrapper" ng-repeat="item in vm.cultureTextBoxes track by $index">
       <label class="control-label">{{item.label}} <span ng-if="vm.markMandatoryLanguages && item.isMandatory"> <strong class="umb-control-required">*</strong> </span> </label>
-      <input type="text" name="item_{{$index}}" ng-model="item.value" ng-blur="vm.updateModel()" class="umb-property-editor umb-textstring textstring flx-i" />
+
+      <input ng-if="vm.useTextArea == false" type="text" name="item_{{$index}}" ng-model="item.value" ng-blur="vm.updateModel()" class="umb-property-editor umb-textstring textstring flx-i" />
+
+      <textarea ng-if="vm.useTextArea" name="item_{{$index}}" ng-model="item.value" ng-blur="vm.updateModel()" class="umb-property-editor umb-textarea textstring flx-i"></textarea>
     </div>
     <input type="hidden" name="mandatory" ng-model="vm.validationString"  />
   </ng-form>
