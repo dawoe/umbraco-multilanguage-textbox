@@ -62,6 +62,18 @@ Or when you are using Models builder
 
 ## Changelog
 
+### 13.0.0
+
+Version compatible with Umbraco 13
+
+### 12.1.0
+
+See 10.2.0
+
+### 10.2.0
+
+Added option to use a text area instead of text input field
+
 ### 12.0.0
 
 Version compatible with Umbraco 12
