@@ -63,7 +63,7 @@ namespace Our.Umbraco.MultilanguageTextbox.Core
 
             if (cultureTexts.Any())
             {
-                var currentCulture = this.variationContextAccessor.VariationContext.Culture;
+                var currentCulture = this.variationContextAccessor.VariationContext?.Culture ?? string.Empty;
 
                 var currentCultureText = cultureTexts.FirstOrDefault(x => x.Culture.InvariantEquals(currentCulture));
 
