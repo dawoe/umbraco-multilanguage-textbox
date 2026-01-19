@@ -17,9 +17,15 @@ export const elementName = `our-multilanguage-textbox`;
 @customElement(elementName)
 export class MultilanguageTextboxElement extends UmbElementMixin(LitElement) {
 
+    constructor() {
+        super();
+        console.debug('[MultiLangTextbox] Constructor called');
+    }
+
     #_value: Array<MultiLanguageDto> = [];
     @property({ type: JSON, attribute: false })
     public set value(val: Array<MultiLanguageDto>) {
+        console.debug('[MultiLangTextbox] Value setter called with:', val);
         val = val || [];
         this.#_value = val;
     }
@@ -29,6 +35,7 @@ export class MultilanguageTextboxElement extends UmbElementMixin(LitElement) {
 
     @property({ attribute: false })
     public set config(config: UmbPropertyEditorConfigCollection) {
+        console.debug('[MultiLangTextbox] Config setter called with:', config);
         this.assignValuesFromConfig(config);
     }
 
@@ -47,12 +54,26 @@ export class MultilanguageTextboxElement extends UmbElementMixin(LitElement) {
     static override styles = [style];
 
     protected override firstUpdated(_changedProperties: PropertyValues): void {
-        this.runPrepItems().then(() => this.isReady = true);
+        console.debug('[MultiLangTextbox] firstUpdated called');
+        this.runPrepItems().then(() => {
+            console.debug('[MultiLangTextbox] runPrepItems completed, isReady = true');
+            this.isReady = true;
+        }).catch(err => {
+            console.error('[MultiLangTextbox] runPrepItems error:', err);
+        });
     }
 
     private async runPrepItems() {
-        const langInfo = await LanguageService.getLanguage();
-        this.langItems = langInfo.items;
+        console.debug('[MultiLangTextbox] runPrepItems - fetching languages...');
+        try {
+            const langResponse = await LanguageService.getLanguage();
+            console.debug('[MultiLangTextbox] Language API response:', langResponse);
+            this.langItems = langResponse.data?.items;
+            console.debug('[MultiLangTextbox] langItems set to:', this.langItems);
+        } catch (error) {
+            console.error('[MultiLangTextbox] Error fetching languages:', error);
+            throw error;
+        }
     }
 
     private assignValuesFromConfig(config: UmbPropertyEditorConfigCollection) {
@@ -83,10 +104,14 @@ export class MultilanguageTextboxElement extends UmbElementMixin(LitElement) {
     }
 
     render() {
+        console.debug('[MultiLangTextbox] render() called - isReady:', this.isReady, 'langItems:', this.langItems);
+        
         if (!this.isReady || !this.langItems) {
+            console.debug('[MultiLangTextbox] Rendering nothing - waiting for data');
             return nothing;
         }
 
+        console.debug('[MultiLangTextbox] Rendering full component with', this.langItems.length, 'languages');
         return html`
          <div class="multilang-wrap">
             ${repeat(this.langItems, x => x.isoCode, lang => {

@@ -2,7 +2,7 @@ const t = {
   name: "Our.Umbraco.MultilanguageTextbox Entrypoint",
   alias: "Our.Umbraco.MultilanguageTextbox.Entrypoint",
   type: "backofficeEntryPoint",
-  js: () => import("./backoffice-entrypoint-C418eHrv.js")
+  js: () => import("./backoffice-entrypoint-DKDg3wjk.js")
 }, n = [
   t
 ];
