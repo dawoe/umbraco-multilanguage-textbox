@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Extensions;
-
 
 namespace Our.Umbraco.MultilanguageTextbox.Core
 {
@@ -30,7 +29,7 @@ namespace Our.Umbraco.MultilanguageTextbox.Core
 
         /// <inheritdoc />
         public override bool IsConverter(IPublishedPropertyType propertyType) =>
-            Constants.PropertyEditorAlias.Equals(propertyType.EditorAlias);
+            Constants.PropertyEditorAlias.Equals(propertyType.EditorUiAlias);
 
         /// <inheritdoc />
         public override Type GetPropertyValueType(IPublishedPropertyType propertyType) => typeof(string);
@@ -59,7 +58,7 @@ namespace Our.Umbraco.MultilanguageTextbox.Core
                 return string.Empty;
             }
 
-            var cultureTexts = JsonConvert.DeserializeObject<List<MultiLanguageTextboxData>>(inter.ToString());
+            var cultureTexts = JsonSerializer.Deserialize<List<MultiLanguageTextboxData>>(inter.ToString());
 
             if (cultureTexts.Any())
             {

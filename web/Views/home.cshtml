@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@{
+    Layout = null;
+    var img = (ContentModels.Image)Umbraco.Media(new Guid("07af522e-e47c-4c34-a373-ec81abb2d429"))!;
+    string? imgDesc = img.MyDescription;
+}
+
+<p>greeting: @Model.Greeting</p>
+<div style="margin: 15px 0;">
+    image: <img src="@img.MediaUrl()" alt="@imgDesc" /><br/>
+    img-my-description: @imgDesc
+</div>
+
+<div>
+    <p>Switch to other languages:</p>
+    <ul>
+        @foreach (var item in Umbraco.AssignedContentItem.Cultures.Values)
+        {
+            <li><a href="@Umbraco.AssignedContentItem.Url(item.Culture)">@item.Culture</a></li>
+        }
+    </ul>
+</div>

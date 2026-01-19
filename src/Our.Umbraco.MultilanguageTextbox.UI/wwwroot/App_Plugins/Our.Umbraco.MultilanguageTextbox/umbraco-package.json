@@ -1,0 +1,13 @@
+{
+	"id": "Our.Umbraco.MultilanguageTextbox",
+	"name": "Our.Umbraco.MultilanguageTextbox",
+	"allowPackageTelemetry": false,
+	"extensions": [
+		{
+			"name": "Our.Umbraco.MultilanguageTextbox Bundle",
+			"alias": "Our.Umbraco.MultilanguageTextbox.Bundle",
+			"type": "bundle",
+			"js": "/App_Plugins/Our.Umbraco.MultilanguageTextbox/client.js"
+		}
+	]
+}

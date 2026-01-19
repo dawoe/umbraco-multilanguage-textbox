@@ -2,7 +2,7 @@
 // Copyright (c) Dave Woestenborghs &amp; Contributors
 // </copyright>
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Our.Umbraco.MultilanguageTextbox.Core
 {
@@ -14,13 +14,13 @@ namespace Our.Umbraco.MultilanguageTextbox.Core
         /// <summary>
         /// Gets or sets the culture.
         /// </summary>
-        [JsonProperty("culture")]
+        [JsonPropertyName("culture")]
         public string Culture { get; set; }
 
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
-        [JsonProperty("text")]
+        [JsonPropertyName("text")]
         public string Text { get; set; }
     }
 }
