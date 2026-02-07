@@ -8,6 +8,7 @@
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path="code/Directory.Build.props" />
+    <File Path="code/Directory.Packages.props" />
   </Folder>
   <Project Path="code/Our.Umbraco.MultilanguageTextbox.Core/Our.Umbraco.MultilanguageTextbox.Core.csproj" />
   <Project Path="code/Our.Umbraco.MultilanguageTextbox.UI/Our.Umbraco.MultilanguageTextbox.UI.csproj" />
