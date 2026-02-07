@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/linting/">
+    <File Path=".editorconfig" />
+    <File Path="stylecop.json" />
+  </Folder>
+  <Folder Name="/Packaging/">
+    <File Path="../appveyor.yml" />
+    <File Path="../Packaging/BuildPackage.ps1" />
+    <File Path="../umbraco-marketplace.json" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/Utilities/">
+    <File Path="../Utilities/CreateNugetPackages.ps1" />
+    <File Path="../Utilities/SetupTestSite.ps1" />
+    <File Path="../Utilities/StartTestSite.ps1" />
+    <File Path="../Utilities/UpdateTestSites.ps1" />
+    <File Path="../Utilities/Variables.ps1" />
+  </Folder>
+  <Project Path="Our.Umbraco.MultilanguageTextbox.Core/Our.Umbraco.MultilanguageTextbox.Core.csproj" />
+  <Project Path="Our.Umbraco.MultilanguageTextbox.UI/Our.Umbraco.MultilanguageTextbox.UI.csproj" />
+  <Project Path="Our.Umbraco.MultilanguageTextbox/Our.Umbraco.MultilanguageTextbox.csproj" />
+</Solution>
