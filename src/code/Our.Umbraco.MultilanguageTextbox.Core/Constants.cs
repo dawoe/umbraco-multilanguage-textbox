@@ -2,16 +2,15 @@
 // Copyright (c) Dave Woestenborghs &amp; Contributors
 // </copyright>
 
-namespace Our.Umbraco.MultilanguageTextbox.Core
+namespace Our.Umbraco.MultilanguageTextbox.Core;
+
+/// <summary>
+/// Represents the constants used in the property editor configuration.
+/// </summary>
+public class Constants
 {
     /// <summary>
-    /// Represents the constants used in the property editor configuration.
+    /// The property editor alias.
     /// </summary>
-    public class Constants
-    {
-        /// <summary>
-        /// The propery editor alias.
-        /// </summary>
-        public const string PropertyEditorAlias = "Our.Umbraco.MultilanguageTextbox";
-    }
+    public const string PropertyEditorAlias = "Our.Umbraco.MultilanguageTextbox";
 }

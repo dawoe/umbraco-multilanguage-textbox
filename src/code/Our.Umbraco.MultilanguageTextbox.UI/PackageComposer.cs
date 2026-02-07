@@ -5,10 +5,9 @@
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 
-namespace Our.Umbraco.MultilanguageTextbox.UI
+namespace Our.Umbraco.MultilanguageTextbox.UI;
+
+internal class PackageComposer : IComposer
 {
-    internal class PackageComposer : IComposer
-    {
-        public void Compose(IUmbracoBuilder builder) => builder.ManifestFilters().Append<PackageManifestFilter>();
-    }
+    public void Compose(IUmbracoBuilder builder) => builder.ManifestFilters().Append<PackageManifestFilter>();
 }

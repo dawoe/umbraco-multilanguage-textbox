@@ -2,25 +2,24 @@
 // Copyright (c) Dave Woestenborghs &amp; Contributors
 // </copyright>
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace Our.Umbraco.MultilanguageTextbox.Core
+namespace Our.Umbraco.MultilanguageTextbox.Core;
+
+/// <summary>
+/// Represents multi language text box data.
+/// </summary>
+public class MultiLanguageTextboxData
 {
     /// <summary>
-    /// Represents multi language text box data.
+    /// Gets or sets the culture.
     /// </summary>
-    public class MultiLanguageTextboxData
-    {
-        /// <summary>
-        /// Gets or sets the culture.
-        /// </summary>
-        [JsonProperty("culture")]
-        public string Culture { get; set; }
+    [JsonPropertyName("culture")]
+    public string? Culture { get; set; }
 
-        /// <summary>
-        /// Gets or sets the text.
-        /// </summary>
-        [JsonProperty("text")]
-        public string Text { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the text.
+    /// </summary>
+    [JsonPropertyName("text")]
+    public string? Text { get; set; }
 }
