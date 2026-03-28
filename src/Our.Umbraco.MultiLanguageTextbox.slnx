@@ -13,4 +13,5 @@
   <Project Path="code/Our.Umbraco.MultilanguageTextbox.Core/Our.Umbraco.MultilanguageTextbox.Core.csproj" />
   <Project Path="code/Our.Umbraco.MultilanguageTextbox.UI/Our.Umbraco.MultilanguageTextbox.UI.csproj" />
   <Project Path="code/Our.Umbraco.MultilanguageTextbox/Our.Umbraco.MultilanguageTextbox.csproj" />
+  <Project Path="testsites/Website-V13/Website-V13.csproj" />
 </Solution>
