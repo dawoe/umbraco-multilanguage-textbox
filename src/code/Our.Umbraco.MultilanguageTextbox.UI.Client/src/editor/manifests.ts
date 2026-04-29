@@ -2,24 +2,24 @@ import MultilanguageTextboxEditorUIElement from "./editor";
 
 const ui: UmbExtensionManifest = {
   type: "propertyEditorUi",
-  alias: "Our.Umbraco.MultilanguageTextbox.PropertyEditorUi",
+  alias: "Our.Umbraco.MultilanguageTextbox",
   name: "Multilanguage Textbox Property Editor",
   element: MultilanguageTextboxEditorUIElement,
   meta: {
     label: "Multilanguage Textbox",
     icon: "icon-indent",
     group: "common",
-    propertyEditorSchemaAlias: "Our.Umbraco.MultilanguageTextbox",
+    propertyEditorSchemaAlias: "Our.Umbraco.MultilanguageTextboxSchema",
   },
 };
 
 const schema: UmbExtensionManifest = {
   type: "propertyEditorSchema",
   name: "Multilanguage Textbox Property Editor Schema",
-  alias: "Our.Umbraco.MultilanguageTextbox",
+  alias: "Our.Umbraco.MultilanguageTextboxSchema",
   meta: {
     defaultPropertyEditorUiAlias:
-      "Our.Umbraco.MultilanguageTextbox.PropertyEditorUi",
+      "Our.Umbraco.MultilanguageTextbox",
     settings: {
       properties: [
         {
