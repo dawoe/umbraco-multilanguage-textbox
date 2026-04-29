@@ -1,5 +1,4 @@
 import {
-    LitElement,
     html,
     css,
     nothing,
@@ -8,19 +7,21 @@ import {
     state,
     repeat,
 } from '@umbraco-cms/backoffice/external/lit';
-import { UmbElementMixin } from '@umbraco-cms/backoffice/element-api';
+import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 import { UmbChangeEvent } from '@umbraco-cms/backoffice/event';
 import type {
     UmbPropertyEditorConfigCollection,
     UmbPropertyEditorUiElement,
 } from '@umbraco-cms/backoffice/property-editor';
-import { UMB_PROPERTY_CONTEXT } from '@umbraco-cms/backoffice/property';
-import { UmbLanguageCollectionRepository } from '@umbraco-cms/backoffice/language';
-import type { UmbLanguageDetailModel } from '@umbraco-cms/backoffice/language';
 import {
-    UMB_VALIDATION_CONTEXT,
-    type UmbValidator,
+    UMB_APP_LANGUAGE_CONTEXT,
+    type UmbLanguageDetailModel,
+} from '@umbraco-cms/backoffice/language';
+import {
+    UmbFormControlMixin,
+    type UmbFormControlMixinElement,
 } from '@umbraco-cms/backoffice/validation';
+import type { HTMLElementConstructor } from '@umbraco-cms/backoffice/extension-api';
 
 export interface MultilanguageTextboxValueItem {
     culture: string;
@@ -29,65 +30,34 @@ export interface MultilanguageTextboxValueItem {
 
 export type MultilanguageTextboxValue = Array<MultilanguageTextboxValueItem>;
 
-/**
- * Cross-field validator that ensures at least one culture has a non-empty value
- * when the property itself is marked as mandatory.
- */
-class AtLeastOneFilledValidator extends EventTarget implements UmbValidator {
-    #host: MultilanguageTextboxEditorUIElement;
-    #valid = true;
-
-    constructor(host: MultilanguageTextboxEditorUIElement) {
-        super();
-        this.#host = host;
-    }
-
-    get isValid(): boolean {
-        return this.#valid;
-    }
-
-    async validate(): Promise<void> {
-        this.#valid = this.#host.hasAnyValue();
-    }
-
-    reset(): void {
-        this.#valid = true;
-    }
-
-    focusFirstInvalidElement(): void {
-        this.#host.focusFirstInput();
-    }
-
-    destroy(): void {
-        // no-op
-    }
-}
+const FormControlElement: HTMLElementConstructor<
+    UmbFormControlMixinElement<MultilanguageTextboxValue | undefined>
+> &
+    typeof UmbLitElement = UmbFormControlMixin<
+    MultilanguageTextboxValue | undefined,
+    typeof UmbLitElement
+>(UmbLitElement);
 
 @customElement('multilanguage-textbox-editor-ui')
 export default class MultilanguageTextboxEditorUIElement
-    extends UmbElementMixin(LitElement)
+    extends FormControlElement
     implements UmbPropertyEditorUiElement {
-    @property({ type: Array })
-    public value: MultilanguageTextboxValue = [];
-
     @state()
     private _useTextArea = false;
 
     @state()
     private _isMandatoryLanguageRequired = false;
 
-    @state()
-    private _isPropertyMandatory = false;
+    /** Set by the parent property element when the property is marked as mandatory. */
+    @property({ type: Boolean })
+    public mandatory = false;
+
+    /** Set by the parent property element to override the default mandatory message. */
+    @property({ type: String })
+    public mandatoryMessage = 'This field is required.';
 
     @state()
     private _languages: UmbLanguageDetailModel[] = [];
-
-    @state()
-    private _atLeastOneError = false;
-
-    #languageRepo = new UmbLanguageCollectionRepository(this);
-    #atLeastOneValidator?: AtLeastOneFilledValidator;
-    #validationContext?: typeof UMB_VALIDATION_CONTEXT.TYPE;
 
     @property({ attribute: false })
     public set config(config: UmbPropertyEditorConfigCollection | undefined) {
@@ -99,67 +69,77 @@ export default class MultilanguageTextboxEditorUIElement
     constructor() {
         super();
 
-        this.consumeContext(UMB_PROPERTY_CONTEXT, (propertyContext) => {
+        this.consumeContext(UMB_APP_LANGUAGE_CONTEXT, (appLanguageContext) => {
             this.observe(
-                propertyContext?.validationMandatory,
-                (mandatory) => {
-                    this._isPropertyMandatory = mandatory ?? false;
-                    this.#refreshAtLeastOneError();
+                appLanguageContext?.languages,
+                (languages) => {
+                    this._languages = languages ?? [];
                 },
-                'observePropertyMandatory',
+                'observeLanguages',
             );
         });
 
-        this.consumeContext(UMB_VALIDATION_CONTEXT, (validationContext) => {
-            if (this.#validationContext && this.#atLeastOneValidator) {
-                this.#validationContext.removeValidator(this.#atLeastOneValidator);
-            }
+        // "valueMissing" validator: blocks save when the property is mandatory
+        // and no culture has a non-empty value.
+        this.addValidator(
+            'valueMissing',
+            () => this.mandatoryMessage,
+            () => this.mandatory && !this.#hasAnyValue(),
+        );
 
-            this.#validationContext = validationContext;
-
-            if (validationContext) {
-                this.#atLeastOneValidator ??= new AtLeastOneFilledValidator(this);
-                validationContext.addValidator(this.#atLeastOneValidator);
-            }
-        });
+        // Custom validator: when mandatory languages are required (and the
+        // property itself is not mandatory), every mandatory language must have
+        // a non-empty value.
+        this.addValidator(
+            'customError',
+            () => this.#missingMandatoryLanguagesMessage(),
+            () =>
+                !this.mandatory &&
+                this._isMandatoryLanguageRequired &&
+                this.#missingMandatoryLanguages().length > 0,
+        );
     }
 
-    override async connectedCallback(): Promise<void> {
-        super.connectedCallback();
-        await this.#loadLanguages();
-    }
-
-    override disconnectedCallback(): void {
-        if (this.#validationContext && this.#atLeastOneValidator) {
-            this.#validationContext.removeValidator(this.#atLeastOneValidator);
+    override willUpdate(changed: Map<string | number | symbol, unknown>): void {
+        super.willUpdate(changed);
+        if (
+            changed.has('mandatory') ||
+            changed.has('value') ||
+            changed.has('_isMandatoryLanguageRequired') ||
+            changed.has('_languages')
+        ) {
+            // Re-run validators so the parent form is notified when state changes.
+            (this as unknown as { _runValidators: () => void })._runValidators?.();
         }
-        super.disconnectedCallback();
     }
 
-    async #loadLanguages(): Promise<void> {
-        const { data } = await this.#languageRepo.requestCollection({});
-        this._languages = data?.items ?? [];
+    #hasAnyValue(): boolean {
+        const value = this.value as MultilanguageTextboxValue | undefined;
+        return (value ?? []).some((v) => (v.text ?? '').trim().length > 0);
     }
 
-    /** True if any culture has a non-empty trimmed text value. */
-    public hasAnyValue(): boolean {
-        return (this.value ?? []).some((v) => (v.text ?? '').trim().length > 0);
+    #missingMandatoryLanguages(): UmbLanguageDetailModel[] {
+        return this._languages.filter(
+            (l) => l.isMandatory && this.#getTextFor(l.unique).trim().length === 0,
+        );
     }
 
-    public focusFirstInput(): void {
-        const el = this.renderRoot.querySelector<HTMLElement>('uui-input, uui-textarea');
-        el?.focus();
+    #missingMandatoryLanguagesMessage(): string {
+        const names = this.#missingMandatoryLanguages().map((l) => l.name).join(', ');
+        return `The following mandatory language(s) are required: ${names}`;
     }
 
     #getTextFor(culture: string): string {
-        return this.value?.find((v) => v.culture === culture)?.text ?? '';
+        const value = this.value as MultilanguageTextboxValue | undefined;
+        return value?.find((v) => v.culture === culture)?.text ?? '';
     }
 
     #onInput(culture: string, e: Event) {
         const target = e.target as HTMLInputElement | HTMLTextAreaElement;
         const text = target.value ?? '';
 
-        const next: MultilanguageTextboxValue = [...(this.value ?? [])];
+        const current = (this.value as MultilanguageTextboxValue | undefined) ?? [];
+        const next: MultilanguageTextboxValue = [...current];
         const idx = next.findIndex((v) => v.culture === culture);
         if (idx >= 0) {
             next[idx] = { culture, text };
@@ -168,24 +148,19 @@ export default class MultilanguageTextboxEditorUIElement
         }
 
         this.value = next;
-        this.#refreshAtLeastOneError();
         this.dispatchEvent(new UmbChangeEvent());
     }
 
-    #refreshAtLeastOneError(): void {
-        this._atLeastOneError = this._isPropertyMandatory && !this.hasAnyValue();
-    }
-
     #isLanguageRequired(language: UmbLanguageDetailModel): boolean {
-        // When property itself is mandatory, individual language fields are not
-        // required (the cross-field validator enforces "at least one").
-        if (this._isPropertyMandatory) return false;
+        // When the property itself is mandatory, individual language fields are
+        // not required (the valueMissing validator enforces "at least one").
+        if (this.mandatory) return false;
         return this._isMandatoryLanguageRequired && language.isMandatory;
     }
 
     override render() {
         if (this._languages.length === 0) {
-            return html`<em>No languages configured.</em>`;
+            return html`<em>Loading languages...</em>`;
         }
 
         return html`
@@ -196,26 +171,24 @@ export default class MultilanguageTextboxEditorUIElement
                     (l) => this.#renderField(l),
                 )}
             </div>
-            ${this._atLeastOneError
-                ? html`<div class="error">At least one language must have a value.</div>`
-                : nothing}
         `;
     }
 
     #renderField(language: UmbLanguageDetailModel) {
         const required = this.#isLanguageRequired(language);
         const value = this.#getTextFor(language.unique);
+        const id = `input-${language.unique}`;
 
         return html`
             <uui-form-layout-item>
-                <uui-label slot="label" for="input-${language.unique}">
+                <uui-label slot="label" for=${id}>
                     ${language.name}${required ? html` <span class="req">*</span>` : nothing}
                 </uui-label>
 
                 ${this._useTextArea
                     ? html`
                           <uui-textarea
-                              id="input-${language.unique}"
+                              id=${id}
                               .value=${value}
                               ?required=${required}
                               @input=${(e: Event) => this.#onInput(language.unique, e)}
@@ -223,7 +196,7 @@ export default class MultilanguageTextboxEditorUIElement
                       `
                     : html`
                           <uui-input
-                              id="input-${language.unique}"
+                              id=${id}
                               .value=${value}
                               ?required=${required}
                               @input=${(e: Event) => this.#onInput(language.unique, e)}
@@ -233,7 +206,7 @@ export default class MultilanguageTextboxEditorUIElement
         `;
     }
 
-    static override styles = css`
+    static styles = css`
         :host {
             display: block;
         }
@@ -248,11 +221,6 @@ export default class MultilanguageTextboxEditorUIElement
         }
         .req {
             color: var(--uui-color-danger, #d42054);
-        }
-        .error {
-            margin-top: var(--uui-size-space-3, 12px);
-            color: var(--uui-color-danger, #d42054);
-            font-size: 0.9em;
         }
     `;
 }
