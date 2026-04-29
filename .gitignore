@@ -4,7 +4,6 @@ src/.vs/
 packages/
 obj/
 bin/
-testsites/
 node_modules/
 dist/
 
@@ -14,3 +13,6 @@ build/UmbracoBuild/
 artifacts/
 build/App_Plugins/
 
+src/code/Our.Umbraco.MultilanguageTextbox.UI/wwwroot/App_Plugins/multilanguagetextbox/
+src/code/Our.Umbraco.MultilanguageTextbox.UI.Client/.agents/skills/
+src/code/Our.Umbraco.MultilanguageTextbox.UI.Client/skills-lock.json

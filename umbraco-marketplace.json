@@ -3,7 +3,17 @@
     "Name": "Dave Woestenborghs",
     "Description": "Umbraco MVP, contributor and package creator from Belgium",
     "Url": "https://github.com/dawoe",
-    "ImageUrl": "https://github.com/dawoe.png",    
+    "ImageUrl": "https://github.com/dawoe.png",   
+	"Contributors": [
+      {
+        "Name": "Brent Heimer",
+        "Url": "https://github.com/brentheimer"
+      },
+      {
+        "Name": "Yari Marën",
+        "Url": "https://github.com/Yinzy00"
+      },     
+    ]
   },
   "Category": "Editor Tools",  
   "DiscussionForumUrl": "https://our.umbraco.com/packages/backoffice-extensions/multilanguage-textbox/",
@@ -11,7 +21,7 @@
   "LicenseTypes": [ "Free" ],
   "IssueTrackerUrl": "https://github.com/dawoe/umbraco-multilanguage-textbox/issues",  
   "PackageType": "Package",
-  "PackagesByAuthor": [ "Dawoe.OEmbedPickerPropertyEditor" ],
+  "PackagesByAuthor": [ "Dawoe.OEmbedPickerPropertyEditor", "Umbraco.Community.PagespeedOptimizer" ],
   "Screenshots": [
     {
       "ImageUrl": "https://raw.githubusercontent.com/dawoe/umbraco-multilanguage-textbox/develop/images/property-editor.jpg",
