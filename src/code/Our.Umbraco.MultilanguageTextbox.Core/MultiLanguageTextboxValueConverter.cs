@@ -24,7 +24,7 @@ public class MultiLanguageTextboxValueConverter(
 {
     /// <inheritdoc />
     public override bool IsConverter(IPublishedPropertyType propertyType) =>
-        Constants.PropertyEditorAlias.Equals(propertyType.EditorAlias);
+        Constants.PropertyEditorAlias.Equals(propertyType.EditorUiAlias);
 
     /// <inheritdoc />
     public override Type GetPropertyValueType(IPublishedPropertyType propertyType) => typeof(string);
