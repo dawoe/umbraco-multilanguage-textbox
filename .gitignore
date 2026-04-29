@@ -13,3 +13,4 @@ build/UmbracoBuild/
 artifacts/
 build/App_Plugins/
 
+src/code/Our.Umbraco.MultilanguageTextbox.UI/wwwroot/App_Plugins/multilanguagetextbox/
