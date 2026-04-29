@@ -1,0 +1,14 @@
+
+{
+    "$schema": "../node_modules/@umbraco-cms/backoffice/dist-cms/umbraco-package-schema.json",
+    "name": "Multi language textbox",
+    "version": "17.0.0",
+    "extensions": [
+        {
+            "type": "backofficeEntryPoint",
+            "alias": "Our.Umbraco.MultilanguageTextbox.EntryPoint",
+            "name": "Multilanguage textbox Entry Point",
+            "js": "/App_Plugins/multilanguagetextbox/entry-point.js?v=17.0.0"
+        }
+    ]
+}

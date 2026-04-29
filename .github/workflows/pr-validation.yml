@@ -1,0 +1,43 @@
+name: PR validation
+
+on:
+  pull_request:
+    branches:
+    - develop
+
+jobs:
+  build:
+    permissions:
+      pull-requests: write
+      contents: read
+    env:
+        BUILD_CONFIG: 'Release'
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.11.1'
+      
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.x'
+          
+      - name: NPM install
+        run:  npm ci
+        working-directory: src/code/Our.Umbraco.MultilanguageTextbox.UI.Client
+        
+      - name: NPM build
+        run:  npm run build
+        working-directory: src/code/Our.Umbraco.MultilanguageTextbox.UI.Client      
+      
+      - name: Restore
+        run: dotnet restore 
+        working-directory: src/
+      
+      - name: Build
+        run: dotnet build -c ${{ env.BUILD_CONFIG }} --no-restore
+        working-directory: src/ 

@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
-
-  <PropertyGroup>
-    <StaticWebAssetBasePath>App_Plugins/Our.Umbraco.MultiLanguageTextbox</StaticWebAssetBasePath>
-  </PropertyGroup>
-
-</Project>

@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Umbraco.Cms.Web.Website" Version="[17.0.0,18.0.0)" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+  </ItemGroup>
+</Project>
