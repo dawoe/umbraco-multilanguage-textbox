@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Author>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Author>
 
 @using Clean.Core.Models.ViewModels
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
@@ -18,7 +18,7 @@
 
                 <div class="row clearfix">
                     <div class="col-md-4 column mx-auto">
-                        <img src="@Model.MainImage.GetCropUrl(400)" alt="@Model.Name" class="w-100">
+                        <img src="@Model.MainImage.GetCropUrl(400)" alt="@(Model.MainImage.Content.Value<string>("altText"))" class="w-100">
                         <p class="caption">@Model.Name</p>
                     </div>
                 </div>
