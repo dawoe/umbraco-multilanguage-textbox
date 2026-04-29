@@ -9,17 +9,7 @@ const ui: UmbExtensionManifest = {
     label: "Multilanguage Textbox",
     icon: "icon-indent",
     group: "common",
-    propertyEditorSchemaAlias: "Our.Umbraco.MultilanguageTextboxSchema",
-  },
-};
-
-const schema: UmbExtensionManifest = {
-  type: "propertyEditorSchema",
-  name: "Multilanguage Textbox Property Editor Schema",
-  alias: "Our.Umbraco.MultilanguageTextboxSchema",
-  meta: {
-    defaultPropertyEditorUiAlias:
-      "Our.Umbraco.MultilanguageTextbox",
+    propertyEditorSchemaAlias: "Umbraco.Plain.Json",
     settings: {
       properties: [
         {
@@ -41,4 +31,5 @@ const schema: UmbExtensionManifest = {
   },
 };
 
-export const manifests = [ui, schema];
+
+export const manifests = [ui];
