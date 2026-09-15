@@ -9,6 +9,7 @@
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
     <LangVersion>latest</LangVersion>
+    <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
 
   <PropertyGroup>
